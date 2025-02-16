@@ -1,27 +1,3 @@
-
-Child Element Questionnaire - Five Elements Theory / استبيان عناصر الطفل - نظرية العناصر الخمسة
-
-This project is a Child Element Questionnaire based on the Five Elements Theory.
-The Five Elements (Wood, Fire, Earth, Metal, Water) originate from ancient Chinese philosophy 
-and are used to understand personality traits, strengths, and challenges. 
-Each element represents different qualities and tendencies in a child's behavior.
-
-Understanding a child's dominant element can help parents and educators support 
-their development in a more personalized way. This questionnaire helps identify 
-the primary element of a child by analyzing responses to key behavioral questions.
-
-Developed to aid parents, teachers, and therapists in better understanding children’s nature.
-
-هذا المشروع هو استبيان يهدف إلى تحديد العنصر المسيطر لدى الطفل بناءً على نظرية العناصر الخمسة.
-تعود أصول هذه النظرية إلى الفلسفة الصينية القديمة، حيث تصنف الشخصيات إلى خمسة عناصر:
-الخشب، النار، الأرض، المعدن، والماء. يمثل كل عنصر مجموعة مختلفة من الصفات والأنماط السلوكية.
-
-يساعد هذا الاختبار الآباء والمربين على فهم أطفالهم بشكل أعمق وتقديم الدعم المناسب لهم.
-يعتمد الاختبار على تحليل الإجابات لفهم العنصر المسيطر لدى الطفل مما يساعد في تعزيز نموه 
-بطريقة تتناسب مع طبيعته.
-
-تم تطوير هذا الاستبيان لمساعدة الآباء والمعلمين والمعالجين على فهم طبيعة الأطفال بشكل أفضل.
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,8 +6,17 @@ Developed to aid parents, teachers, and therapists in better understanding child
     <title>Child Element Quiz</title>
     <style>
         body { font-family: Arial, sans-serif; margin: 20px; direction: rtl; text-align: right; }
-        .container { max-width: 600px; margin: auto; }
+        .container { max-width: 800px; margin: auto; }
         h2 { text-align: center; }
+        .description { 
+            background: #f9f9f9; 
+            padding: 15px; 
+            border-radius: 8px; 
+            margin-bottom: 20px; 
+            font-size: 16px; 
+            line-height: 1.6; 
+            color: #333;
+        }
         .question { margin-bottom: 15px; }
         .result { display: none; padding: 15px; background: #f4f4f4; margin-top: 20px; border: 1px solid #ccc; }
         button { display: block; width: 100%; padding: 10px; margin-top: 10px; background: #28a745; color: white; border: none; cursor: pointer; }
@@ -41,6 +26,49 @@ Developed to aid parents, teachers, and therapists in better understanding child
 <body>
     <div class="container">
         <h2>استبيان عناصر الطفل / Child Element Questionnaire</h2>
+
+        <!-- Description Section -->
+        <div class="description">
+            <!-- English Description -->
+            <div dir="ltr" style="text-align: left;">
+                <strong>Child Element Questionnaire - Five Elements Theory</strong>
+                <p>
+                    This project is a Child Element Questionnaire based on the Five Elements Theory.
+                    The Five Elements (Wood, Fire, Earth, Metal, Water) originate from ancient Chinese 
+                    philosophy and are used to understand personality traits, strengths, and challenges.
+                    Each element represents different qualities and tendencies in a child's behavior.
+                </p>
+                <p>
+                    Understanding a child's dominant element can help parents and educators support 
+                    their development in a more personalized way. This questionnaire helps identify 
+                    the primary element of a child by analyzing responses to key behavioral questions.
+                </p>
+                <p>
+                    Developed to aid parents, teachers, and therapists in better understanding children’s nature.
+                </p>
+            </div>
+
+            <hr style="border: 0.5px solid #ccc; margin: 10px 0;"> <!-- Divider -->
+
+            <!-- Arabic Description -->
+            <div dir="rtl" style="text-align: right;">
+                <strong>استبيان عناصر الطفل - نظرية العناصر الخمسة</strong>
+                <p>
+                    هذا المشروع هو استبيان يهدف إلى تحديد العنصر المسيطر لدى الطفل بناءً على نظرية العناصر الخمسة.
+                    تعود أصول هذه النظرية إلى الفلسفة الصينية القديمة، حيث تصنف الشخصيات إلى خمسة عناصر:
+                    الخشب، النار، الأرض، المعدن، والماء. يمثل كل عنصر مجموعة مختلفة من الصفات والأنماط السلوكية.
+                </p>
+                <p>
+                    يساعد هذا الاختبار الآباء والمربين على فهم أطفالهم بشكل أعمق وتقديم الدعم المناسب لهم.
+                    يعتمد الاختبار على تحليل الإجابات لفهم العنصر المسيطر لدى الطفل مما يساعد في تعزيز نموه
+                    بطريقة تتناسب مع طبيعته.
+                </p>
+                <p>
+                    تم تطوير هذا الاستبيان لمساعدة الآباء والمعلمين والمعالجين على فهم طبيعة الأطفال بشكل أفضل.
+                </p>
+            </div>
+        </div>
+
         <form id="quiz-form">
             <div id="questions"></div>
             <button type="submit">إرسال / Submit</button>
