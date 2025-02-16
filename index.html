@@ -127,10 +127,10 @@
             </div>
         </div>
 
-        <form id="quiz-form">
-            <div id="questions"></div>
-            <button type="submit">إرسال / Submit</button>
-        </form>
+       <form id="quiz-form">
+    <div id="questions"></div> <!-- Questions will appear here -->
+    <button type="submit">إرسال / Submit</button>
+</form>
         <div id="result" class="result"></div>
     </div>
 
@@ -221,27 +221,27 @@
             };
 
             function populateQuestions() {
-                const questionsDiv = document.getElementById("questions");
-                if (!questionsDiv) return;
+    const questionsDiv = document.getElementById("questions");
+    if (!questionsDiv) return;
 
-                questionsDiv.innerHTML = "";
+    questionsDiv.innerHTML = ""; // Clear old questions before adding new ones
 
-                Object.keys(elements).forEach((element) => {
-                    elements[element].questions.forEach((question, index) => {
-                        const div = document.createElement("div");
-                        div.className = "question";
-                        div.innerHTML = `
-                            <label>${question}</label>
-                            <select name="${element}-${index}" required>
-                                <option value="" disabled selected>اختر / Select</option>
-                                <option value="1">نادراً / Rarely</option>
-                                <option value="2">أحيانًا / Sometimes</option>
-                                <option value="3">كثيرًا / Often</option>
-                            </select>`;
-                        questionsDiv.appendChild(div);
-                    });
-                });
-            }
+    Object.keys(elements).forEach((element) => {
+        elements[element].questions.forEach((question, index) => {
+            const div = document.createElement("div");
+            div.className = "question";
+            div.innerHTML = `
+                <label>${question}</label>
+                 <select name="${element}-${index}" required>
+                    <option value="" disabled selected>اختر / Select</option>
+                    <option value="1">نادراً / Rarely</option>
+                    <option value="2">أحيانًا / Sometimes</option>
+                    <option value="3">كثيرًا / Often</option>
+                </select>`;
+            questionsDiv.appendChild(div);
+        });
+    });
+}
 
             document.getElementById("quiz-form").addEventListener("submit", function (event) {
                 event.preventDefault();
@@ -279,12 +279,6 @@
                     document.getElementById("result").style.display = "block";
                     return;
                 }
-
-                let resultHTML = `
-    <h2 style="font-size: 34px; font-weight: bold; color: #007bff; margin-bottom: 20px;">
-        🔹 العنصر المسيطر / <span style="font-size: 38px;">Dominant Element:</span>
-    </h2>
-`;
 
 dominantElements.forEach((element) => {
 let resultHTML = `
