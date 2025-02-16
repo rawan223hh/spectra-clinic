@@ -287,6 +287,13 @@
 `;
 
 dominantElements.forEach((element) => {
+let resultHTML = `
+    <h2 style="font-size: 34px; font-weight: bold; color: #007bff; margin-bottom: 20px;">
+        🔹 العنصر المسيطر / <span style="font-size: 38px;">Dominant Element:</span>
+    </h2>
+`;
+
+dominantElements.forEach((element) => {
     resultHTML += `
         <h3 style="font-size: 26px; font-weight: bold; margin-top: 20px; color: #333;">${element}</h3>
         
@@ -310,19 +317,10 @@ dominantElements.forEach((element) => {
 document.getElementById("result").innerHTML = resultHTML;
 document.getElementById("result").style.display = "block";
 
-                dominantElements.forEach((element) => {
-                    resultHTML += `<strong>${element}</strong><br>`;
-                    resultHTML += `<strong>الصفات / Traits:</strong> ${elements[element].traits}<br>`;
-                    resultHTML += `<strong>النصائح / Advice:</strong> ${elements[element].advice}<br>`;
-                    resultHTML += `<strong>المهن / Careers:</strong> ${elements[element].careers}<br><br>`;
-                });
+});
 
-                document.getElementById("result").innerHTML = resultHTML;
-                document.getElementById("result").style.display = "block";
-            });
-
-            populateQuestions();
-        });
-    </script>
+populateQuestions();
+});
+</script>
 </body>
 </html>
