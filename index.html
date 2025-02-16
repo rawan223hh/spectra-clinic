@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Child Element Quiz</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; direction: rtl; text-align: right; }
+        .container { max-width: 600px; margin: auto; }
+        h2 { text-align: center; }
+        .question { margin-bottom: 15px; }
+        .result { display: none; padding: 15px; background: #f4f4f4; margin-top: 20px; border: 1px solid #ccc; }
+        button { display: block; width: 100%; padding: 10px; margin-top: 10px; background: #28a745; color: white; border: none; cursor: pointer; }
+        button:hover { background: #218838; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>استبيان عناصر الطفل / Child Element Questionnaire</h2>
+        <form id="quiz-form">
+            <div id="questions"></div>
+            <button type="submit">إرسال / Submit</button>
+        </form>
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const elements = {
+            Wood: {
+                traits: "نشط، فضولي، قوي الإرادة، سريع التصرف، يحب الفوز، يتعلم بالممارسة، يحب المخاطر / Energetic, curious, strong-willed, quick to act, loves to win, learns by doing, loves danger",
+                careers: "رائد أعمال، مستجيب للطوارئ، طبيب، فنان، محامٍ، معلم / Entrepreneur, Emergency Responder, Medical Careers, Artist, Lawyer, Teacher",
+                advice: "Increase drinking water & fluids, give fish oils, prioritize bathing, swimming, and sleep. Take baths with Epsom salt each night before bed. Use The Breathing Exercise. Try craniosacral therapy and acupuncture. The Homework Game, mapping the day, yoga, hiking, martial arts, or physical therapy. Encourage performance and leadership. Consider Dancing, Gymnastics & Angry 1-2-3 game. Encourage hands-on activities like building or crafting.Practice eating together, help in cooking meals, and chanting/singing together, proteins for breakfast. Play cooperative games with the family to promote teamwork and bonding / زيادة شرب الماء والسوائل، تناول زيوت السمك، إعطاء الأولوية للاستحمام والسباحة والنوم. أخذ حمامات بملح إبسوم كل ليلة قبل النوم. تجربة العلاج بالتدليك القحفي العجزي والوخز بالإبر. ممارسة التنفس، تخطيط اليوم، اليوغا، المشي لمسافات طويلة، الفنون القتالية أو العلاج الطبيعي. تشجيع الأداء والقيادة. الرقص، الجمباز ولعبة غضب 1-2-3. تشجيع الأنشطة العملية مثل البناء أو الحرف اليدوية. ممارسة تناول الطعام معًا، المساعدة في إعداد الوجبات، والترديد/الغناء معًا، وتناول البروتينات في وجبة الإفطار. لعب الألعاب التعاونية مع العائلة لتعزيز العمل الجماعي والتواصل",
+                questions: [
+                    "هل يستمتع طفلك بتجربة أشياء جديدة ويحب التحديات / Does your child enjoy trying new things and taking on challenges?",
+                    "هل يتعلم طفلك من خلال النشاط البدني / Does your child learn physically?",
+                    "هل يحب طفلك إثارة المخاطر / Does your child love the thrill of danger?",
+                    "طفلك بيعمل تبول لا إرادي بشكل متكرر؟ / Does your child have recurrent bed wetting?",
+                    "طفلك بيعصب جدًا أو بيغضب لما يضايق؟ /Does your child have explosive anger when upset?",
+                    "طفلك بيحب السكريات أو الصودا أو الزبدة؟ / Does your child crave stimulants like sugar, soda, or butter?",
+                    "طفلك دايمًا واثق في نفسه جدًا ومش بيحب يطلب مساعدة من حد؟ / Does your child often show overconfidence or not want help from others?",
+                    "طفلك بيكره لما حد يطلب منه حاجة أو لما يحس إنه متقيد؟ / Does your child dislike being told what to do or feeling restricted?"
+                ]
+            },
+            Fire: {
+                traits: "حماسي، اجتماعي، مفعم بالطاقة، مرح، مضحك، متفائل / Excitable, social, full of energy, playful, funny, optimistic",
+                careers: "معلم، صحفي، طاهٍ، عامل حضانة / Teacher, Journalist, Chef, Daycare Worker",
+                advice: "Mapping out the day, and providing steady fuel with a protein breakfast, team sports or group projects to encourage social interaction. Include colorful visuals, charts, or diagrams to keep them engaged while studying or doing tasks, focusing on better sleep, using games to sharpen memory, and using fish oils, drink enough water, and salty rather than sweet foods. Take baths with Epsom salt each night before bed. Work on timing, cooking, blood-sugar control, singing, & using flash cards. Have a daily family ritual. Humor and silliness by including activities like dancing, acting, music, and role-playing to allow them to express their energy and creativity, breathing meditation; aromatherapy, 1-2-3 Anger game. / تخطيط اليوم وتوفير طاقة ثابتة بوجبة إفطار غنية بالبروتين، وممارسة الرياضات الجماعية أو المشاريع الجماعية لتعزيز التفاعل الاجتماعي. استخدام صور ملونة، جداول، أو مخططات لإبقائهم متفاعلين أثناء الدراسة أو أداء المهام، مع التركيز على تحسين النوم، واستخدام الألعاب لتقوية الذاكرة، وتناول زيوت السمك، وشرب كمية كافية من الماء، واختيار الأطعمة المالحة بدلًا من الحلوة. أخذ حمامات بملح إبسوم كل ليلة قبل النوم. العمل على ضبط التوقيت، الطهي، التحكم في نسبة السكر في الدم، الغناء، استخدام بطاقات التذكير. تخصيص طقس عائلي يومي. إدخال الفكاهة والمرح من خلال أنشطة مثل الرقص، التمثيل، الموسيقى، وألعاب الأدوار للسماح لهم بالتعبير عن طاقاتهم وإبداعهم. ممارسة التأمل بالتنفس، العلاج بالعطور، ولعبة غضب 1-2-3",
+                questions: [
+                    "هل يحب طفلك التواجد حول الآخرين / Does your child love being around other people?",
+                    "هل تتغير مزاجات طفلك بسرعة / Does your child often change moods quickly?",
+                    "هل يعاني طفلك من صعوبة في النوم / Does your child have difficulty falling asleep?",
+                    "طفلك بيشتكي من الإسهال أو آلام المعدة كتير؟ / Does your child experience diarrhea or stomach discomfort often?",
+                    "طفلك بيحب الحلويات أو الأكل الحراق أو التلج؟ / Does your child crave sweets, spicy food or ice?",
+                    "Does your child get flushed or sweat a lot? / طفلك وشه بيحمر أو بيعرق كتير؟",
+                    "Is your child easily panicked or upset by small issues? / طفلك بيتوتر أو يتضايق بسرعة من حاجات بسيطة؟",
+                    "طفلك دايمًا بيشتكي إنه زهقان؟ / Does your child complain of being bored often?",
+                    "Does your child tend to act impulsively or unpredictably? / طفلك بيعمل حاجات بطريقة متهورة أو غير متوقعة؟"
+                ]
+            },
+            Earth: {
+                traits: "حنون، مفكر، مخلص، أحيانًا قلق / Caring, kind, thoughtful, loyal, sometimes worried and anxious",
+                careers: "أخصائي اجتماعي، معلم، فنان، طبيب / Social Worker, Teacher, Artist, Healthcare Professional",
+                advice: "Use humor and play, sensory integration, and belly massage, avoid excessively cold foods (ice cream) that slow digestion. Walk barefoot on grass, mapping out stories and activities, and increasing movement. Increase protein in the diet and try vision therapy. Earth children love working with others, so involve them in group activities. Use arts and crafts, music, The Pattern Game, breathing exercises. Play a game with your child during meals or while preparing food. Focus on the color, taste, texture, and smell of the food & cook with your child and sing or chant together to make the experience more enjoyable. Practice qigong exercise, try to plant flowers or vegetables together to connect with nature and promote a sense of responsibility  /  استخدام الفكاهة واللعب، الدمج الحسي، وتدليك البطن، وتجنب الأطعمة الباردة جدًا (مثل الآيس كريم) التي تبطئ عملية الهضم. المشي حافي القدمين على العشب، ورسم القصص والأنشطة، وزيادة الحركة. زيادة تناول البروتين في النظام الغذائي وتجربة علاج الرؤية. يحب الأطفال المتصلون بالأرض العمل مع الآخرين، لذا يجب إشراكهم في الأنشطة الجماعية. استخدام الفنون والحرف اليدوية، الموسيقى، لعبة الأنماط، تمارين التنفس. لعب لعبة مع الطفل أثناء الوجبات أو أثناء تحضير الطعام. التركيز على لون الطعام، طعمه، قوامه، ورائحته، والطهي مع الطفل والغناء أو الترديد معًا لجعل التجربة أكثر متعة. ممارسة تمارين تشيقونغ، محاولة زراعة الزهور أو الخضروات معًا لتعزيز الارتباط بالطبيعة وتعزيز الشعور بالمسؤولية",
+                questions: [
+                    "طفلك بيعاني من وجع في معدته أو عسر هضم؟ / Does your child have stomach aches or indigestion?",
+                    "طفلك دايمًا مهتم بالناس وبيفكر فيهم؟ / Is your child caring and always thinking about others?",
+                    "Does your child overeat? / طفلك بيأكل أكتر من الطبيعي؟",
+                    "Does your child feel anxious when away from loved ones or when not feeling accepted? / طفلك بيقلق لما يكون بعيد عن الناس اللي بيحبهم أو لما يحس إنه مش مقبول؟",
+                    "Does your child have trouble setting boundaries or respecting personal space? / طفلك عنده مشكلة في احترام الحدود الشخصية أو إنه يحط حدود لنفسه؟",
+                    "Does your child often socialize excessively? / طفلك بيحب الاختلاط والاندماج مع الناس بشكل كبير؟",
+                    "Does your child crave sweets and carbohydrates like sugar or bread? / طفلك بيحب السكريات والنشويات زي السكر أو العيش؟",
+                    "Is your child disorganized? / طفلك مش منظم؟",
+                    "Is your child sometimes whiny, needy, or clingy? / طفلك ساعات بيكون زنّان أو محتاج اهتمام زيادة أو متعلق بزيادة؟"
+                ]
+            },
+            Metal: {
+                traits: "منظم، دقيق، يركز على التفاصيل / Organized, careful, detail-focused",
+                careers: "مهندس، محاسب، معمار، عالم / Engineer, Accountant, Architect, Scientist",
+                advice: "Massages, cooking, gardening, and singing. Map out the day: Create a written schedule for the child, such as wake up, eat breakfast, wash, brush teeth, to help them stay organized & develop a routine that is predictable and structured, encouraging play-acting, sensory integration. I Spy Something New game. Engage in arts and crafts, model building, jewelry making, or activities involving patterns. Introduce music, such as playing the drums. Increase drinking water & fluids, give fish oils, prioritize bathing, swimming, and sleep. Take baths with Epsom salt each night before bed. Work on timing. Use The Breathing Exercise. Use Breathing exercises. Encourage puzzles and brain games to stimulate their mind / التدليك، الطهي، البستنة، والغناء. تخطيط اليوم: إنشاء جدول مكتوب للطفل مثل الاستيقاظ، تناول الإفطار، الغسل، تنظيف الأسنان لمساعدته على البقاء منظمًا وتطوير روتين متوقع ومنظم. تشجيع التمثيل، الدمج الحسي، الانخراط في الفنون والحرف اليدوية، بناء النماذج، صنع المجوهرات، أو الأنشطة التي تتضمن الأنماط. إدخال الموسيقى، مثل العزف على الطبول. زيادة شرب الماء والسوائل، تناول زيوت السمك، وإعطاء الأولوية للاستحمام، السباحة، والنوم. أخذ حمامات بملح إبسوم كل ليلة قبل النوم. العمل على ضبط التوقيت. استخدام تمرين التنفس. تشجيع الألغاز والألعاب الذهنية لتحفيز العقل", 
+                questions: [
+                    "هل يحب طفلك الروتين ويكره المفاجآت / Does your child like having a routine and dislike surprises or changes",
+                    "هل يشتهي طفلك أطعمة غير عادية / Does your child crave unusual food",
+                    "هل ينزعج طفلك عند ارتكاب الأخطاء / Does your child get upset when they make mistakes or when things go wrong",
+                    "طفلك بيحب كل حاجة تكون مرتبة ونظيفة؟ / Does your child like things to be orderly and tidy?",
+                    "Does your child tend to blame others when something goes wrong? / طفلك بيلوم الناس كتير لما يحصل حاجة غلط؟",
+                    "Is your child very sensitive to smells, tastes, or textures? / طفلك حساس جدًا للروائح أو الطعم أو الملمس؟",
+                    "Does your child get extremely cold easily? / طفلك بيحس بالبرد بسرعة؟",
+                    "Does your child experience constipation? / طفلك بيعاني من إمساك؟",
+                    "Does your child have stiff joints? / طفلك مفاصله ناشفة أو عنده خشونة؟",
+                    "Does your child experience dry skin or hair? / طفلك جلده أو شعره ناشف؟"
+                ]
+            },
+            Water: {
+                traits: "خيالي، هادئ، يحب الأحلام، يأخذ وقته / Imaginative, quiet, loves to dream, takes time",
+                careers: "كاتب، فنان، موسيقي، طبيب نفسي / Writer, Artist, Musician, Psychologist",
+                advice: "Try The Time Game and Encourage taking omega-3 fish oil for brain health, ensure they drink plenty of water to stay hydrated, make sure they get enough sleep to recharge, swimming is a great physical activity that can help them feel calm and energized & try bathing in Epsom salt (magnesium sulfate) to relax their muscles and calm their mind, taking social-skills classes, joining clubs, and eating together. Play the I’m Hungry 1-2-3 Game, prepare protein shakes for your child, plan three random acts of kindness every week to help them feel connected to others, include physical movement, including hiking, martial arts, and yoga. Try vision therapy and allow limited video game/phone use. Go on nature walks to help them connect with the world around them. Encourage them to write and draw as a way to express themselves, give them quiet time to work on tasks alone, without distractions, meditation, memory games, singing, entertaining, homeopathy, craniosacral therapy, and storytelling  /  جرب لعبة التوقيت وشجع على تناول زيت السمك أوميغا-3 لصحة الدماغ، وتأكد من شربهم كمية كافية من الماء للحفاظ على الترطيب، واحرص على حصولهم على قسط كافٍ من النوم لاستعادة النشاط. السباحة نشاط بدني رائع يساعدهم على الشعور بالهدوء والنشاط، كما يمكن تجربة الاستحمام بملح إبسوم (كبريتات المغنيسيوم) لاسترخاء العضلات وتهدئة العقل ويمكن تعزيز المهارات الاجتماعية من خلال حضور دروس تنمية المهارات الاجتماعية، والانضمام إلى النوادي، وتناول الطعام مع العائلة. جرب لعبة أنا جائع 1-2-3 - حضّر لطفلك مخفوقات البروتين، وخطط لثلاثة أعمال عشوائية من اللطف كل أسبوع لمساعدتهم على الشعور بالارتباط بالآخرين والأنشطة البدنية مثل المشي لمسافات طويلة، الفنون القتالية، واليوغا. جرب علاج الرؤية وقلل من وقت استخدام ألعاب الفيديو والهاتف. قم بالمشي في الطبيعة لمساعدتهم على التواصل مع العالم من حولهم. شجعهم على الكتابة والرسم كوسيلة للتعبير عن أنفسهم، وامنحهم وقتًا هادئًا للعمل على المهام بمفردهم دون تشتيت - التأمل، ألعاب الذاكرة، الغناء، الترفيه، العلاج المنزلي، العلاج بالتدليك القحفي العجزي، وسرد القصص",
+                questions: [
+                    "هل لدى طفلك خيال واسع ويحب أحلام اليقظة / Does your child have a big imagination and enjoy daydreaming?",
+                    "هل يشعر طفلك بالراحة عند البقاء بمفرده / Does your child feel comfortable being alone?",
+                    "هل يواجه طفلك صعوبة في إنهاء المهام / Does your child have trouble finishing tasks or feel like giving up?",
+                    "طفلك بيجيله أفكار سلبية وبيفضل محبوس فيها؟ / Does your child have negative thoughts or get stuck in a negative mood?",
+                    "طفلك بياخد وقته في كل حاجة؟ / Does your child take their time doing things?",
+                    "طفلك بيلاقي صعوبة يعبر عن أفكاره أو مشاعره؟ / Does your child have difficulty expressing their ideas or emotions?",
+                    "طفلك عنده مشكلة إنه يحفز نفسه يعمل حاجة؟ / Does your child struggle with being motivated to do things?",
+                    "طفلك عنده ذاكرة قوية؟ / Does your child have a good memory?",
+                    "طفلك بيعمل مجهود جسدي قليل؟ / Does your child experience low physical stamina?",
+                    "طفلك بيحب الأكلات المالحة، اللحوم أو الأكلات السخنة؟ / Does your child crave salty, meats or hot foods?"
+                    ]
+                 }
+            };
+
+            function populateQuestions() {
+                const questionsDiv = document.getElementById("questions");
+                if (!questionsDiv) return;
+
+                questionsDiv.innerHTML = "";
+
+                Object.keys(elements).forEach((element) => {
+                    elements[element].questions.forEach((question, index) => {
+                        const div = document.createElement("div");
+                        div.className = "question";
+                        div.innerHTML = `
+                            <label>${question}</label>
+                            <select name="${element}-${index}" required>
+                                <option value="" disabled selected>اختر / Select</option>
+                                <option value="1">نادراً / Rarely</option>
+                                <option value="2">أحيانًا / Sometimes</option>
+                                <option value="3">كثيرًا / Often</option>
+                            </select>`;
+                        questionsDiv.appendChild(div);
+                    });
+                });
+            }
+
+            document.getElementById("quiz-form").addEventListener("submit", function (event) {
+                event.preventDefault();
+                let valid = true;
+
+                document.querySelectorAll("select").forEach(select => {
+                    if (!select.value) {
+                        valid = false;
+                        select.style.border = "2px solid red";
+                    } else {
+                        select.style.border = "1px solid #ccc";
+                    }
+                });
+
+                if (!valid) {
+                    alert("يرجى الإجابة على جميع الأسئلة قبل الإرسال / Please answer all questions before submitting.");
+                    return;
+                }
+
+                const formData = new FormData(event.target);
+                let scores = { Wood: 0, Fire: 0, Metal: 0, Water: 0 };
+
+                formData.forEach((value, key) => {
+                    const elementType = key.split("-")[0];
+                    if (scores.hasOwnProperty(elementType)) {
+                        scores[elementType] += parseInt(value) || 0;
+                    }
+                });
+
+                const highestScore = Math.max(...Object.values(scores));
+                const dominantElements = Object.keys(scores).filter((key) => scores[key] === highestScore);
+
+                if (dominantElements.length === 0) {
+                    document.getElementById("result").innerHTML = "<h3>العنصر المسيطر:</h3> <p>لا يوجد عنصر مهيمن. حاول مرة أخرى! / No dominant element found. Try again!</p>";
+                    document.getElementById("result").style.display = "block";
+                    return;
+                }
+
+                let resultHTML = "<h3>العنصر المسيطر / Dominant Element:</h3>";
+                dominantElements.forEach((element) => {
+                    resultHTML += `<strong>${element}</strong><br>`;
+                    resultHTML += `<strong>الصفات / Traits:</strong> ${elements[element].traits}<br>`;
+                    resultHTML += `<strong>النصائح / Advice:</strong> ${elements[element].advice}<br>`;
+                    resultHTML += `<strong>المهن / Careers:</strong> ${elements[element].careers}<br><br>`;
+                });
+
+                document.getElementById("result").innerHTML = resultHTML;
+                document.getElementById("result").style.display = "block";
+            });
+
+            populateQuestions();
+        });
+    </script>
+</body>
+</html>
