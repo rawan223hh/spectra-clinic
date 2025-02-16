@@ -217,31 +217,30 @@
                     "طفلك بيعمل مجهود جسدي قليل؟ / Does your child experience low physical stamina?",
                     "طفلك بيحب الأكلات المالحة، اللحوم أو الأكلات السخنة؟ / Does your child crave salty, meats or hot foods?"
                     ]
-                 }
+                }
             };
 
             function populateQuestions() {
-    const questionsDiv = document.getElementById("questions");
-    if (!questionsDiv) return;
+                const questionsDiv = document.getElementById("questions");
+                if (!questionsDiv) return;
+                questionsDiv.innerHTML = "";
 
-    questionsDiv.innerHTML = ""; // Clear old questions before adding new ones
-
-    Object.keys(elements).forEach((element) => {
-        elements[element].questions.forEach((question, index) => {
-            const div = document.createElement("div");
-            div.className = "question";
-            div.innerHTML = `
-                <label>${question}</label>
-                 <select name="${element}-${index}" required>
-                    <option value="" disabled selected>اختر / Select</option>
-                    <option value="1">نادراً / Rarely</option>
-                    <option value="2">أحيانًا / Sometimes</option>
-                    <option value="3">كثيرًا / Often</option>
-                </select>`;
-            questionsDiv.appendChild(div);
-        });
-    });
-}
+                Object.keys(elements).forEach((element) => {
+                    elements[element].questions.forEach((question, index) => {
+                        const div = document.createElement("div");
+                        div.className = "question";
+                        div.innerHTML = `
+                            <label>${question}</label>
+                            <select name="${element}-${index}" required>
+                                <option value="" disabled selected>اختر / Select</option>
+                                <option value="1">نادراً / Rarely</option>
+                                <option value="2">أحيانًا / Sometimes</option>
+                                <option value="3">كثيرًا / Often</option>
+                            </select>`;
+                        questionsDiv.appendChild(div);
+                    });
+                });
+            }
 
             document.getElementById("quiz-form").addEventListener("submit", function (event) {
                 event.preventDefault();
@@ -262,7 +261,7 @@
                 }
 
                 const formData = new FormData(event.target);
-                let scores = { Wood: 0, Fire: 0, Metal: 0, Water: 0 };
+                let scores = { Wood: 0, Fire: 0, Earth: 0, Metal: 0, Water: 0 };
 
                 formData.forEach((value, key) => {
                     const elementType = key.split("-")[0];
@@ -274,47 +273,27 @@
                 const highestScore = Math.max(...Object.values(scores));
                 const dominantElements = Object.keys(scores).filter((key) => scores[key] === highestScore);
 
-                if (dominantElements.length === 0) {
-                    document.getElementById("result").innerHTML = "<h3>العنصر المسيطر:</h3> <p>لا يوجد عنصر مهيمن. حاول مرة أخرى! / No dominant element found. Try again!</p>";
-                    document.getElementById("result").style.display = "block";
-                    return;
-                }
+                let resultHTML = `
+                    <h2 style="font-size: 34px; font-weight: bold; color: #007bff; margin-bottom: 20px;">
+                        🔹 العنصر المسيطر / <span style="font-size: 38px;">Dominant Element:</span>
+                    </h2>
+                `;
 
-dominantElements.forEach((element) => {
-let resultHTML = `
-    <h2 style="font-size: 34px; font-weight: bold; color: #007bff; margin-bottom: 20px;">
-        🔹 العنصر المسيطر / <span style="font-size: 38px;">Dominant Element:</span>
-    </h2>
-`;
+                dominantElements.forEach((element) => {
+                    resultHTML += `
+                        <h3 style="font-size: 26px; font-weight: bold; margin-top: 20px; color: #333;">${element}</h3>
+                        <p><strong>🔹 Traits:</strong> ${elements[element].traits}</p>
+                        <p><strong>🔹 Careers:</strong> ${elements[element].careers}</p>
+                        <p><strong>🔹 Advice:</strong> ${elements[element].advice}</p>
+                    `;
+                });
 
-dominantElements.forEach((element) => {
-    resultHTML += `
-        <h3 style="font-size: 26px; font-weight: bold; margin-top: 20px; color: #333;">${element}</h3>
-        
-        <p style="margin-bottom: 15px;">
-            <strong style="font-size: 20px; color: #000;">🔹 الصفات / Traits:</strong> 
-            ${elements[element].traits}
-        </p>
+                document.getElementById("result").innerHTML = resultHTML;
+                document.getElementById("result").style.display = "block";
+            });
 
-        <p style="margin-bottom: 15px;">
-            <strong style="font-size: 20px; color: #000;">🔹 المهن / Careers:</strong> 
-            ${elements[element].careers}
-        </p>
-
-        <p style="margin-bottom: 15px; line-height: 1.8;">
-            <strong style="font-size: 20px; color: #000;">🔹 النصائح / Advice:</strong> 
-            ${elements[element].advice}
-        </p>
-    `;
-});
-
-document.getElementById("result").innerHTML = resultHTML;
-document.getElementById("result").style.display = "block";
-
-});
-
-populateQuestions();
-});
-</script>
+            populateQuestions();
+        });
+    </script>
 </body>
 </html>
