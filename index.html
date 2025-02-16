@@ -280,7 +280,36 @@
                     return;
                 }
 
-                let resultHTML = "<h3>العنصر المسيطر / Dominant Element:</h3>";
+                let resultHTML = `
+    <h2 style="font-size: 28px; font-weight: bold; color: #007bff; margin-bottom: 15px;">
+        🔹 العنصر المسيطر / <span style="font-size: 32px;">Dominant Element:</span>
+    </h2>
+`;
+
+dominantElements.forEach((element) => {
+    resultHTML += `
+        <h3 style="font-size: 26px; font-weight: bold; margin-top: 20px; color: #333;">${element}</h3>
+        
+        <p style="margin-bottom: 15px;">
+            <strong style="font-size: 20px; color: #000;">🔹 الصفات / Traits:</strong> 
+            ${elements[element].traits}
+        </p>
+
+        <p style="margin-bottom: 15px;">
+            <strong style="font-size: 20px; color: #000;">🔹 المهن / Careers:</strong> 
+            ${elements[element].careers}
+        </p>
+
+        <p style="margin-bottom: 15px; line-height: 1.8;">
+            <strong style="font-size: 20px; color: #000;">🔹 النصائح / Advice:</strong> 
+            ${elements[element].advice}
+        </p>
+    `;
+});
+
+document.getElementById("result").innerHTML = resultHTML;
+document.getElementById("result").style.display = "block";
+
                 dominantElements.forEach((element) => {
                     resultHTML += `<strong>${element}</strong><br>`;
                     resultHTML += `<strong>الصفات / Traits:</strong> ${elements[element].traits}<br>`;
