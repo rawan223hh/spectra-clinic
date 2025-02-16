@@ -5,47 +5,88 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Child Element Quiz</title>
 
-    <!-- Google Fonts for Poppins -->
+    <!-- Google Fonts for Poppins (Modern & Sleek) -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
     <style>
+        /* 🌟 BEAUTIFUL STYLING 🌟 */
         body {
-            font-family: "Poppins", Arial, sans-serif !important; /* Ensure font applies */
+            font-family: "Poppins", Arial, sans-serif !important;
             background-color: #f9f9f9 !important;
             color: #333 !important;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
         }
 
         h2 {
-            font-size: 28px !important;
+            font-size: 32px !important;
             color: #007bff !important;
             text-align: center !important;
             font-weight: bold !important;
+            margin-bottom: 20px;
         }
 
+        /* 🌸 Styled Description Section 🌸 */
         .description {
-            font-size: 18px !important;
+            font-size: 20px !important;
             color: #444 !important;
             background: white !important;
             padding: 20px !important;
-            border-radius: 8px !important;
+            border-radius: 10px !important;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1) !important;
-            margin-bottom: 20px !important;
+            margin-bottom: 30px !important;
+            line-height: 1.8;
         }
 
+        /* Arabic Styling */
+        [dir="rtl"] {
+            font-family: "Cairo", sans-serif !important;
+            text-align: right !important;
+        }
+
+        /* 🔥 Sexy Buttons 🔥 */
         button {
             background: #ff4081 !important;
-            font-size: 18px !important;
+            font-size: 20px !important;
             font-weight: bold !important;
-            border-radius: 10px !important;
+            border-radius: 12px !important;
             transition: 0.3s !important;
-            padding: 10px 20px !important;
+            padding: 12px 24px !important;
             border: none !important;
             cursor: pointer !important;
             color: white !important;
+            display: block;
+            width: 100%;
+            text-transform: uppercase;
         }
 
         button:hover {
             background: #d81b60 !important;
+            transform: scale(1.05);
+        }
+
+        .question {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .result {
+            display: none;
+            padding: 20px;
+            background: #f4f4f4;
+            border: 1px solid #ccc;
+            font-size: 18px;
+            border-radius: 8px;
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -53,32 +94,27 @@
     <div class="container">
         <h2>استبيان عناصر الطفل / Child Element Questionnaire</h2>
 
-        <!-- Beautifully formatted description -->
-        <div class="description" style="text-align: center;">
+        <!-- 💖 BEAUTIFUL DESCRIPTION 💖 -->
+        <div class="description">
             <!-- English Section -->
-            <div dir="ltr" style="text-align: left; direction: ltr; padding: 10px;">
-                <strong style="font-size: 20px;">Child Element Questionnaire - Five Elements Theory</strong>
+            <div dir="ltr" style="text-align: left; padding: 10px;">
+                <strong style="font-size: 22px;">Child Element Questionnaire - Five Elements Theory</strong>
                 <p>
                     This project is a Child Element Questionnaire based on the Five Elements Theory.
                     The Five Elements (Wood, Fire, Earth, Metal, Water) originate from ancient Chinese 
                     philosophy and are used to understand personality traits, strengths, and challenges.
                 </p>
                 <p>
-                    Each element represents different qualities and tendencies in a child's behavior.
                     Understanding a child's dominant element can help parents and educators support 
                     their development in a more personalized way.
                 </p>
-                <p>
-                    This questionnaire helps identify the primary element of a child by analyzing responses 
-                    to key behavioral questions.
-                </p>
             </div>
 
-            <hr style="border: 1px solid #ccc; margin: 20px 0; width: 80%;"> <!-- Divider -->
+            <hr style="border: 1px solid #ccc; margin: 20px 0; width: 80%;">
 
             <!-- Arabic Section -->
-            <div dir="rtl" style="text-align: right; direction: rtl; padding: 10px;">
-                <strong style="font-size: 20px;">استبيان عناصر الطفل - نظرية العناصر الخمسة</strong>
+            <div dir="rtl" style="text-align: right; padding: 10px;">
+                <strong style="font-size: 22px;">استبيان عناصر الطفل - نظرية العناصر الخمسة</strong>
                 <p>
                     هذا المشروع هو استبيان يهدف إلى تحديد العنصر المسيطر لدى الطفل بناءً على نظرية العناصر الخمسة.
                     تعود أصول هذه النظرية إلى الفلسفة الصينية القديمة، حيث تصنف الشخصيات إلى خمسة عناصر:
@@ -87,10 +123,6 @@
                 <p>
                     يمثل كل عنصر مجموعة مختلفة من الصفات والأنماط السلوكية.
                     يساعد هذا الاختبار الآباء والمربين على فهم أطفالهم بشكل أعمق وتقديم الدعم المناسب لهم.
-                </p>
-                <p>
-                    يعتمد الاختبار على تحليل الإجابات لفهم العنصر المسيطر لدى الطفل مما يساعد في تعزيز نموه 
-                    بطريقة تتناسب مع طبيعته.
                 </p>
             </div>
         </div>
